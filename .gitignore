@@ -1,3 +1,5 @@
 tmpdata
 static/videos 
 *.pyc
+.idea
+__pycache__
