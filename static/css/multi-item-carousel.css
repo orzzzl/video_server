@@ -2,5 +2,6 @@
 
 .Carousel-inner { transition: 1s ease all; float: left; }
 
-    .Carousel-inner .item { float: left; border: None; text-align:center; }
-    .leftLst, .rightLst { margin-top:15px;}
+.Carousel-inner .item { float: left; border: None; text-align:center; }
+
+.leftLst, .rightLst { margin-top:15px;}

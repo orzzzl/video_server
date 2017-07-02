@@ -2,14 +2,23 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
-	<link rel="icon" type="image/png" href="{{ static_url('img/favicon.jpg') }}">
+	<link rel="icon" type="image/png" href="{{ static_url('img/favicon.png') }}">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>DeepMagic DashBoard</title>
+	<title>DashBoard</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
 
+
+    <link href="http://vjs.zencdn.net/6.1.0/video-js.css" rel="stylesheet">
+
+    <script src="http://vjs.zencdn.net/5-unsafe/video.js"></script>
+
+    <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
+         rel = "stylesheet">
+    <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 
     <!-- Bootstrap core CSS     -->
     <link href="{{ static_url('css/bootstrap.min.css')}}" rel="stylesheet" />
@@ -20,9 +29,6 @@
     <!--  Light Bootstrap Table core CSS    -->
     <link href="{{ static_url('css/light-bootstrap-dashboard.css') }}" rel="stylesheet"/>
 
-    <!--  CSS for Demo Purpose, don't include it in your project     -->
-    <link href="{{ static_url('css/demo.css') }}" rel="stylesheet" />
-
     <!--     Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
@@ -31,11 +37,17 @@
     <!--  CSS for multi item carousel    -->
     <link href="{{ static_url('css/multi-item-carousel.css') }}" rel="stylesheet" />
 
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
+
+    <!--  CSS for Demo Purpose, don't include it in your project     -->
+    <link href="{{ static_url('css/demo.css') }}" rel="stylesheet" />
 </head>
 <body>
 
 <div class="wrapper">
-    <div class="sidebar" data-color="purple" data-image="{{static_url('img/sidebar-1.png') }}">
+    <div class="sidebar" data-color="green" data-image="{{static_url('img/sidebar-1.png') }}">
 
     <!--
 
@@ -46,22 +58,16 @@
 
     	<div class="sidebar-wrapper">
             <div class="logo">
-                <a href="http://www.creative-tim.com" class="simple-text">
-                    DeepMagic Dashboard
+                <a class="simple-text">
+                    <img src="{{ static_url('img/favicon.png') }}" width="80px"> <span id="deepmagic">by deepmagic</span>
                 </a>
             </div>
 
             <ul class="nav">
                 <li class="active">
-                    <a href="viewsession">
+                    <a href="#">
                         <i class="pe-7s-graph"></i>
                         <p>View Session</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="user.html">
-                        <i class="pe-7s-user"></i>
-                        <p>PlaceHolder</p>
                     </a>
                 </li>
                 <li>
@@ -70,26 +76,32 @@
                         <p>Session List</p>
                     </a>
                 </li>
+               <li>
+                    <a href="#">
+                        <i class="pe-7s-user"></i>
+                        <p>Merchant Profile</p>
+                    </a>
+                </li>
                 <li>
-                    <a href="typography.html">
+                    <a href="#">
                         <i class="pe-7s-news-paper"></i>
-                        <p>PlaceHolder</p>
+                        <p>Inventory</p>
                     </a>
                 </li>
                 <li>
-                    <a href="icons.html">
+                    <a href="#">
                         <i class="pe-7s-science"></i>
-                        <p>PlaceHolder</p>
+                        <p>Settings</p>
                     </a>
                 </li>
                 <li>
-                    <a href="maps.html">
+                    <a href="#">
                         <i class="pe-7s-map-marker"></i>
                         <p>Maps</p>
                     </a>
                 </li>
                 <li>
-                    <a href="notifications.html">
+                    <a href="#">
                         <i class="pe-7s-bell"></i>
                         <p>Notifications</p>
                     </a>
@@ -134,7 +146,7 @@
 
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                           <a href="">
+                           <a href="" class="orange-header">
                                Account
                             </a>
                         </li>
@@ -178,204 +190,108 @@
                 <div class="row">
                     <div class="Carousel" data-items="1,3,5,6" data-slide="1" id="ResSlid1">
                             <div class="Carousel-inner">
+                                <div class="item" id="item-1">
+                                    <div class="col-xs-12 col-sm-12 col-lg-12">
+                                        <div class="card">
+                                            <div class="header">
+                                                <h4 class="title">Camera1</h4>
+                                            </div>
+                                             <div class="content">
+                                                      <video id="video-1" width="100%" class="video-js vjs-fluid" controls preload="auto" data-setup="{}">
+                                                          <source src="{{src1}}" id="video-1-source" type='video/webm'>
+                                                          <p class="vjs-no-js">
+                                                              To view this video please enable JavaScript, and consider upgrading to a web browser that
+                                                              <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+                                                        </p>
+                                                      </video>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p id='hidden1' class="not-visible">{{duration1}}</p>
+                                </div>
                                 <div class="item">
                                     <div class="col-xs-12 col-sm-12 col-lg-12">
                                         <div class="card">
                                             <div class="header">
-                                                <h4 class="title">Camera1</h4>
-                                                <p class="category">Some infomation about the location of the camera.</p>
+                                                <h4 class="title">Camera2</h4>
                                             </div>
                                              <div class="content">
-                                                    <video width="100%" controls>
-                                                            <source src="{{ src1 }}" type="video/mp4">
-                                                            Your browser does not support the video tag.
+                                                    <video id="video-2" width="100%" class="video-js vjs-fluid" controls preload="auto" data-setup="{}">
+                                                          <source src="{{src2}}" type='video/webm'>
+                                                          <p class="vjs-no-js">
+                                                              To view this video please enable JavaScript, and consider upgrading to a web browser that
+                                                              <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+                                                        </p>
                                                     </video>
-
-                                                <div class="footer">
-                                                    <hr>
-                                                    <div class="stats">
-                                                        <i class="fa fa-clock-o"></i> uploaded at XXXX time
-                                                    </div>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                                                <div class="item">
-                                    <div class="col-xs-12 col-sm-12 col-lg-12">
-                                        <div class="card">
-                                            <div class="header">
-                                                <h4 class="title">Camera1</h4>
-                                                <p class="category">Some infomation about the location of the camera.</p>
-                                            </div>
-                                             <div class="content">
-                                                    <video width="100%" controls>
-                                                            <source src="{{ src2 }}" type="video/mp4">
-                                                            Your browser does not support the video tag.
-                                                    </video>
-
-                                                <div class="footer">
-                                                    <hr>
-                                                    <div class="stats">
-                                                        <i class="fa fa-clock-o"></i> uploaded at XXXX time
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <p id='hidden2' class="not-visible">{{duration2}}</p>
                                 </div>
                             </div>
                         </div>
-                        <div>
+                        <div class="controler" id="control-panel">
                             <button class="btn btn-primary leftLst">◀</button>
                             <button class="btn btn-primary rightLst">▶</button>
-                            <br><br><br>
+                            <button onclick="toggle()" id="play_pause" value='play' class="btn btn-primary control-button">Play</button>
+                            <button onclick="annotate_toggle()" id="annotate" value='original' class="btn btn-primary control-button">Show Annotated</button>
+                            <span id="progress"> <span id="cur_time" class="text_right"> 0.0 </span> / <span id="duration1">{{duration1}}</span> </span>
+                            <br> <br>
+                            <div id = "slider-1"></div>
+                            <br>
                         </div>
                 </div>
             </div>
 
+            <p hidden id='warning_massage' class="blink">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Warning: More items in AI transactions than in commercial transactions.</p>
+
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="card ">
                             <div class="header">
-                                <h4 class="title">AI transactions</h4>
-                                <p class="category">Transactions captured by the AI system</p>
+                                <h4 class="title inline-fonts">AI transactions</h4> <span class="text_showing_right"><h4 class="inline-fonts">Item Count:<span id="aic">{{aic}}</span></h4></span>
+                                <p class="inline-fonts category">Transactions captured by the AI system</p>
                             </div>
                             <div class="content">
-                                <div class="content table-responsive table-full-width">
-                                    <table class="table table-hover table-striped">
+                                    <table class="table hideextra">
                                         <thead>
                                             <th>ID</th>
-                                            <th>Customer Name</th>
                                             <th>Time</th>
                                             <th>Action</th>
-                                            <th>Item Name</th>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Dakota Rice</td>
-                                                <td>2017-6-12 15:33</td>
-                                                <td>Grab</td>
-                                                <td>Coke</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Minerva Hooper</td>
-                                                <td>2017-6-12 15:33</td>
-                                                <td>Put Back</td>
-                                                <td>Chocklate</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Sage Rodriguez</td>
-                                                <td>2017-6-12 15:33</td>
-                                                <td>Grab</td>
-                                                <td>Cigratte</td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>Philip Chaney</td>
-                                                <td>2017-6-12 15:33</td>
-                                                <td>Grab</td>
-                                                <td>Book</td>
-                                            </tr>
-                                            <tr>
-                                                <td>5</td>
-                                                <td>Doris Greene</td>
-                                                <td>2017-6-12 15:33</td>
-                                                <td>Put Back</td>
-                                                <td>Chopsticks</td>
-                                            </tr>
-                                            <tr>
-                                                <td>6</td>
-                                                <td>Mason Porter</td>
-                                                <td>2017-6-12 15:33</td>
-                                                <td>Grab</td>
-                                                <td>Coke</td>
-                                            </tr>
+                                           {% for ai_transaction in ai_transactions %}
+                                                {% raw ai_transaction %}
+                                            {% end %}
                                         </tbody>
                                     </table>
-
-                            </div>
-
-                                <div class="footer">
-                                    <hr>
-                                    <div class="stats">
-                                        <i class="fa fa-clock-o"></i> uploaded at XXXX time
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-8">
                         <div class="card ">
                             <div class="header">
-                                <h4 class="title">Commertial transactions</h4>
+                                <h4 class="title inline-fonts">Commercial transactions</h4> <span class="text_showing_right"><h4 class="inline-fonts">Item Count:<span id="cic">{{cic}}</span></h4></span>
                                 <p class="category">Transactions customer has taken</p>
                             </div>
                             <div class="content">
-                                                                    <table class="table table-hover table-striped">
+                                <table class="table hideextra">
                                         <thead>
                                             <th>ID</th>
-                                            <th>Customer Name</th>
                                             <th>Time</th>
                                             <th>Action</th>
                                             <th>Item Name</th>
+                                            <th>EAN</th>
+                                            <th>Catagory</th>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Dakota Rice</td>
-                                                <td>2017-6-12 15:33</td>
-                                                <td>Add in Kart</td>
-                                                <td>Coke</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Minerva Hooper</td>
-                                                <td>2017-6-12 15:33</td>
-                                                <td>Add in Kart</td>
-                                                <td>Chocklate</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Sage Rodriguez</td>
-                                                <td>2017-6-12 15:33</td>
-                                                <td>Delete</td>
-                                                <td>Cigratte</td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>Philip Chaney</td>
-                                                <td>2017-6-12 15:33</td>
-                                                <td>Add in Kart</td>
-                                                <td>Book</td>
-                                            </tr>
-                                            <tr>
-                                                <td>5</td>
-                                                <td>Doris Greene</td>
-                                                <td>2017-6-12 15:33</td>
-                                                <td>Delete</td>
-                                                <td>Chopsticks</td>
-                                            </tr>
-                                            <tr>
-                                                <td>6</td>
-                                                <td>Mason Porter</td>
-                                                <td>2017-6-12 15:33</td>
-                                                <td>Add in Kart</td>
-                                                <td>Coke</td>
-                                            </tr>
+                                            {% for commercial_transaction in commercial_transactions %}
+                                                {% raw commercial_transaction %}
+                                            {% end %}
                                         </tbody>
                                     </table>
-                                <div class="footer">
-                                    <hr>
-                                    <div class="stats">
-                                        <i class="fa fa-clock-o"></i> uploaded at XXXX time
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -413,7 +329,6 @@
     </div>
 </div>
 
-
 </body>
 
     <!--   Core JS Files   -->
@@ -440,4 +355,154 @@
 
         <!-- Js for multi item carousel -->
     <script src="{{ static_url('js/multi-item-carousel.js') }}" type="text/javascript"></script>
+
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script>
+        var mp1 = videojs('video-1');
+        var mp2 = videojs('video-2');
+        mp1.bigPlayButton.hide();
+        mp2.bigPlayButton.hide();
+
+        ai_count = parseInt($('#aic').text())
+        c_count = parseInt($('#cic').text());
+
+        if(ai_count > c_count) {
+            $('#warning_massage').show();
+        }
+
+        d1 = parseFloat($('#hidden1').text())
+        d2 = parseFloat($('#hidden2').text())
+
+        d = Math.min(d1, d2)
+
+
+        $('#slider-1').slider({
+        change: function(event, ui) {
+            if (event.originalEvent) {
+                v = ui.value * d / 100;
+                mp1.currentTime(v);
+                mp2.currentTime(v);
+                if(mp1.paused() == false) {
+                    mp1.play();
+                }
+                if(mp2.paused() == false) {
+                    mp2.play();
+                }
+            }
+            else {
+            }
+        },
+
+        slide : function(e, ui) {
+            //user is dragging
+            dragged = true;
+        },
+        stop : function(e, ui) {
+            //user has dropped
+            dragged = false;
+        }
+    });
+
+        var dragged = false;
+
+        var get_time_text = function (t) {
+            var sec_num = parseInt(t, 10);
+            var hours   = Math.floor(sec_num / 3600);
+            var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+            var seconds = sec_num - (hours * 3600) - (minutes * 60);
+
+            if (hours   < 10) {hours   = "0"+hours;}
+            if (minutes < 10) {minutes = "0"+minutes;}
+            if (seconds < 10) {seconds = "0"+seconds;}
+            return hours+':'+minutes+':'+seconds;
+        }
+
+        var play = function() {
+            document.getElementById('play_pause').value = 'pause';
+            $("#play_pause").text("pause");
+            mp1.play();
+            mp2.play();
+        };
+
+        var pause = function() {
+            document.getElementById('play_pause').value = 'play';
+            $("#play_pause").text("play");
+            mp1.pause();
+            mp2.pause();
+        }
+
+        var update = function () {
+            $('#cur_time').text(get_time_text(mp1.currentTime()));
+            value = mp1.currentTime() / d * 100.0;
+            $('#slider-1').slider('value', value);
+            if(value >= 100.0) {
+                $('#slider-1').slider('value', 0);
+                mp1.currentTime(0);
+                mp2.currentTime(0);
+                pause();
+            }
+        }
+        
+        var toggle = function () {
+            if(document.getElementById('play_pause').value == 'play') {
+                play();
+            } else {
+                pause();
+            }
+        }
+
+        var set_video_time = function (t) {
+            mp1.currentTime(t);
+            mp2.currentTime(t);
+            $('#slider-1').slider('value', t);
+        }
+
+        var annotate_toggle = function () {
+            if(document.getElementById('annotate').value == 'original') {
+                $('#annotate').text('Show original');
+                document.getElementById('annotate').value = 'annotated';
+                now_t = mp1.currentTime();
+                mp1.src("{{src1_a}}");
+                mp2.src("{{src2_a}}");
+                set_video_time(now_t);
+                if(document.getElementById('play_pause').value == 'play') {
+                    pause();
+                } else {
+                    play();
+                }
+
+            } else {
+                $('#annotate').text('Show Annotated');
+                document.getElementById('annotate').value = 'original';
+                now_t = mp1.currentTime();
+                mp1.src("{{src1}}");
+                mp2.src("{{src2}}");
+                set_video_time(now_t);
+                if(document.getElementById('play_pause').value == 'play') {
+                    pause();
+                } else {
+                    play();
+                }
+            }
+        }
+
+        window.setInterval(function(){
+            if(dragged == false) {
+                update();
+            }
+            $(".event_row").each(function(){
+                t = mp1.currentTime();
+                tt = parseFloat($(this).attr('value'));
+                if(t >= tt - 1 && t <= tt + 2) {
+                    $(this).css('color', 'red');
+                } else {
+                    $(this).css('color', 'black');
+                }
+            })
+        }, 200);
+
+        t = $('#duration1').text();
+        $('#duration1').text(get_time_text(t));
+    </script>
 </html>

@@ -22,9 +22,11 @@ html_str = """
     <br>
     <span class="col-md-4"> <label>Start Time:</label> <span>{{start_time}}</span> </span>
     <span class="col-md-4"> <label>End Time:</label> <span>{{end_time}}</span> </span>
-    <span class="col-md-4"> <label>Duration:</label> <span>10</span>{{duration}}</span>
+    <span class="col-md-4"> <label>Duration:</label> <span>{{duration}}</span></span>
     <br>
-    <span class="col-md-12"> <label>Pod Address:</label> <span>625 6AV, New York, 10011</span></span>
+    <span class="col-md-4"> <label>Pod Address:</label> <span>625 6AV, New York, 10011</span></span>
+    <span class="col-md-4"> <label>Merchant id:</label> <span>0</span></span>
+    <span class="col-md-4"> <label>Merchant name:</label> <span>Zeleng Zhuang</span></span>
     <br>
     <br>
 </div>
@@ -86,7 +88,7 @@ class SessionManager(DatabaseWriter):
                                            end_time=session['end_time'],
                                            customer_name=self._customer.get_customer_name_by_id(session['customer_id']),
                                            pod_id=session['pod_id'],
-                                           duration=session['duration']
+                                           duration=session['duration'][:7]
         )
 
     def render_session2(self, session):
@@ -95,7 +97,7 @@ class SessionManager(DatabaseWriter):
                                            end_time=session['end_time'],
                                            customer_name=self._customer.get_customer_name_by_id(session['customer_id']),
                                            pod_id=session['pod_id'],
-                                           duration=session['duration']
+                                           duration=session['duration'][:7]
         )
 
     def render_sessions(self, sessions):

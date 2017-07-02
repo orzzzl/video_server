@@ -5,11 +5,16 @@ from inventory import *
 import logging, json
 from database.session_manager import SessionManager
 from database.video_writer import VideoWriter
+from database.ai_transactions import AITransactions
+from database.commercial_transactions import CommercialTransactions
 
 
 log = logging.getLogger(__name__)
 sm = SessionManager()
 vw = VideoWriter()
+ai = AITransactions()
+ct = CommercialTransactions()
+
 
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
@@ -65,23 +70,37 @@ class VideoSessionEnd(tornado.web.RequestHandler):
         end_time = self.get_argument('end_time')
         duration = self.get_argument('duration')
         cameras = eval(self.get_argument('cameras'))
-        cmd = 'sh concat_videos.sh tmpdata/%s' % (session_id)
-        os.system(cmd)
+        # cmd = 'sh concat_videos.sh tmpdata/%s' % (session_id)
+        # os.system(cmd)
         sm.end_session(session_id, end_time, duration)
-        for idx in cameras:
-            vw.write_video_to_db(session_id, idx)
+        # for idx in cameras:
+        #     vw.write_video_to_db(session_id, idx)
 
 
 
 class ViewSessionHandler(tornado.web.RequestHandler):
     def get(self, session_id):
         videos = vw.get_videos_by_session_id(int(session_id))
-        session = sm.render_session2(sm.get_session_by_id(int(session_id)))
+        sss = sm.get_session_by_id(int(session_id))
+        session = sm.render_session2(sss)
+        d0 = int(videos[0]['duration'])
+        d1 = int(videos[1]['duration'])
+        t0 = videos[0]['upload_time']
+        t1 = videos[1]['upload_time']
+        print(t0)
+        print(t1)
         v1 = str(videos[0]['session_id']) + '_' + str(videos[0]['local_camera_idx'])
-        src1 = self.static_url('videos/%s.mp4' % v1)
+        src1 = self.static_url('videos/%s.webm' % v1)
         v2 = str(videos[1]['session_id']) + '_' + str(videos[1]['local_camera_idx'])
-        src2 = self.static_url('videos/%s.mp4' % v2)
-        return self.render('viewsession.html', src1=src1, src2=src2, session=session)
+        src2 = self.static_url('videos/%s.webm' % v2)
+        src1_a = self.static_url('videos/%s_a.webm' % v1)
+        src2_a = self.static_url('videos/%s_a.webm' % v2)
+        ai_transactions = ai.render_all(int(session_id))
+        commercial_transactions = ct.render_all(int(session_id))
+        cic = sss['commercial_item_count']
+        aic = sss['ai_item_count']
+
+        return self.render('viewsession.html', cic=cic, aic=aic, commercial_transactions=commercial_transactions, ai_transactions=ai_transactions, src1_a= src1_a, src2_a= src2_a, src1=src1, src2=src2, duration1=d0, duration2=d1, session=session, time1=t0, time2=t1)
 
 
 class SessionListHandler(tornado.web.RequestHandler):

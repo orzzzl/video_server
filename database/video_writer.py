@@ -1,7 +1,7 @@
 from .database_writer import DatabaseWriter
 import os
 from tornado import template
-
+from .helpers import findVideoMetada
 
 
 
@@ -13,7 +13,9 @@ class VideoWriter(DatabaseWriter):
         file_path = 'static/videos/%s_%s.mp4' % (session_id, camera_idx)
         assert os.path.isfile(file_path)
 
-        sql = 'INSERT INTO videos (file_path, local_camera_idx, session_id) VALUES ("%s", %s, %s)' % (file_path, camera_idx, session_id)
+        duration = findVideoMetada(file_path)
+
+        sql = 'INSERT INTO videos (file_path, local_camera_idx, duration, session_id) VALUES ("%s", %s, %s, %s)' % (file_path, camera_idx, duration, session_id)
         self.execute(sql)
 
 

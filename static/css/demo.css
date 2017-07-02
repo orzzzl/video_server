@@ -59,3 +59,67 @@
 .table-upgrade td:nth-child(3){
     text-align: center;
 }
+
+.controler {
+    margin-left: 40px;
+}
+
+#slider-1 {
+    width: 70%;
+}
+
+.control-button {
+    margin-top:15px;
+}
+
+.vjs-control-bar { display:none!important; }
+
+.not-visible {
+  display: none;
+}
+
+#progress {
+    margin-top: 15px;
+    float: right;
+    margin-right: 300px;
+}
+
+.text_showing_right {
+    float: right;
+}
+
+.blink {
+    color: red;
+    animation-duration: 1s;
+    animation-name: blink;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: ease-in-out;
+}
+@keyframes blink {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+.inline-fonts {
+    display: inline;
+}
+
+.hideextra { white-space: nowrap; overflow: hidden; text-overflow:ellipsis; }
+
+#ResSlid1 {
+    padding-bottom: 0px;
+    margin-bottom: -20px;
+}
+
+.orange-header {
+    color: #FF6327;
+}
+
+#deepmagic {
+    vertical-align: bottom;
+}
